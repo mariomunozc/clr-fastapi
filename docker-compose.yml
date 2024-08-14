@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - ENV_VAR_NAME=value
+    networks:
+      - app-network
+
+# Descomenta lo siguiente si necesitas una base de datos o servicios adicionales
+#  db:
+#    image: postgres:latest
+#    environment:
+#      POSTGRES_DB: dbname
+#      POSTGRES_USER: user
+#      POSTGRES_PASSWORD: password
+#    volumes:
+#      - db-data:/var/lib/postgresql/data
+#    networks:
+#      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+# Descomenta para la persistencia de datos de la base de datos
+#volumes:
+#  db-data:
