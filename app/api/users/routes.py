@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, status
 from typing import Annotated, List
 import app.api.users.models as UserModel
-from app.core.database import engine, connect_database
+from app.core.database import engine, get_db
 from sqlalchemy.orm import Session
 from app.api.users.services import UserBase, user_service
 
@@ -9,7 +9,7 @@ router = APIRouter()
 
 UserModel.Base.metadata.create_all(bind=engine)
 
-db_dependency = Annotated[Session, Depends(connect_database)]
+db_dependency = Annotated[Session, Depends(get_db)]
 
 @router.post("/user/", status_code=status.HTTP_201_CREATED, tags=["User"], response_model=UserBase)
 async def create_user(user: UserBase, db: db_dependency):

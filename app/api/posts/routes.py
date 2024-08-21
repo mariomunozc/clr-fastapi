@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from typing import Annotated, List
 import app.api.posts.models as PostModel
-from app.core.database import engine, connect_database
+from app.core.database import engine, get_db
 from sqlalchemy.orm import Session
 from app.api.posts.services import PostBase, post_service
 import requests
@@ -30,7 +30,7 @@ def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
 
 PostModel.Base.metadata.create_all(bind=engine)
 
-db_dependency = Annotated[Session, Depends(connect_database)]
+db_dependency = Annotated[Session, Depends(get_db)]
 
 @router.post("/posts/", status_code=status.HTTP_201_CREATED, tags=["Post"], response_model=PostBase)
 async def create_post(post: PostBase, db: db_dependency):

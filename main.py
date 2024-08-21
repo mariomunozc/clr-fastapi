@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.api.posts.routes import router as RouterPost
 from app.api.users.routes import router as RouterUser
 from app.api.gtrack.routes import router as RouterGtrack
-from app.core.database import connect_database, disconnect_database
+from app.core.database import get_db
 
 # Función para crear la aplicación FastAPI
 def create_app():

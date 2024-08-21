@@ -11,12 +11,9 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
-def connect_database():
+def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
-
-def disconnect_database(db):
-    db.close()

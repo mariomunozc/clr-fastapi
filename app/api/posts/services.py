@@ -1,12 +1,12 @@
 from fastapi import HTTPException, Depends
 from typing import List
 from app.api.posts.models import Post as PostModel  # Importa el modelo de datos necesario
-from app.core.database import connect_database  # Importa la instancia de base de datos (ejemplo ficticio)
+from app.core.database import get_db  # Importa la instancia de base de datos (ejemplo ficticio)
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import Annotated
 
-db_dependency = Annotated[Session, Depends(connect_database)]
+db_dependency = Annotated[Session, Depends(get_db)]
 
 class PostBase(BaseModel):
     title: str
