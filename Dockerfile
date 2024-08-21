@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 80
 
 # Comando para ejecutar la aplicación cuando se inicie el contenedor
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

@@ -4,28 +4,13 @@ services:
   app:
     build: .
     ports:
-      - "80:80"
-    environment:
-      - ENV_VAR_NAME=value
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
     networks:
       - app-network
-
-# Descomenta lo siguiente si necesitas una base de datos o servicios adicionales
-#  db:
-#    image: postgres:latest
-#    environment:
-#      POSTGRES_DB: dbname
-#      POSTGRES_USER: user
-#      POSTGRES_PASSWORD: password
-#    volumes:
-#      - db-data:/var/lib/postgresql/data
-#    networks:
-#      - app-network
+    command: uvicorn main:app --host 0.0.0.0 --port ${PORT} --reload
 
 networks:
   app-network:
     driver: bridge
-
-# Descomenta para la persistencia de datos de la base de datos
-#volumes:
-#  db-data:

@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from app.api.posts.routes import router as RouterPost
 from app.api.users.routes import router as RouterUser
+from app.api.gtrack.routes import router as RouterGtrack
 from app.core.database import connect_database, disconnect_database
 
 # Función para crear la aplicación FastAPI
 def create_app():
     app = FastAPI(
-        title="FastAPI CRUD",
+        title="CLR Fast Api",
         description="This is a simple CRUD API with FastAPI",
         version="1.0",
         docs_url="/docs",
@@ -17,6 +18,7 @@ def create_app():
     # Registrando los routers
     app.include_router(router=RouterPost, prefix="/api")
     app.include_router(router=RouterUser, prefix="/api")
+    app.include_router(router=RouterGtrack, prefix="/api")
     
     return app
 
