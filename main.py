@@ -16,8 +16,8 @@ def create_app():
     )
     
     # Registrando los routers
-    app.include_router(router=RouterPost, prefix="/api")
-    app.include_router(router=RouterUser, prefix="/api")
+    # app.include_router(router=RouterPost, prefix="/api")
+    # app.include_router(router=RouterUser, prefix="/api")
     app.include_router(router=RouterGtrack, prefix="/api")
     
     return app
