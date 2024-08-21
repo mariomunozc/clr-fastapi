@@ -3,15 +3,15 @@ version: '3.8'
 services:
   app:
     build: .
-    command: uvicorn app.main:app --host 0.0.0.0 --reload
-    volumes:
-      - .:/app
     ports:
-      - "8000:8000"
-    environment:
-      - ENV_VAR_NAME=value
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
     networks:
       - app-network
+    volumes:
+      - .:/app  # Monta el directorio actual como volumen
+    command: uvicorn main:app --host 0.0.0.0 --port ${PORT} --reload
 
 networks:
   app-network:
